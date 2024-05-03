@@ -1,0 +1,11 @@
+server:
+    port: 8081
+
+com:
+  c4-soft:
+    springaddons:
+      oidc:
+        ops:
+        - iss: http://localhost:8080/realms/
+          authorities:
+          - path: $.realm_access.roles

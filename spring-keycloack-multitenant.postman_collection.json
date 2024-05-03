@@ -1,0 +1,299 @@
+{
+	"info": {
+		"_postman_id": "52d887bd-9f00-4070-8e18-7978306f0e46",
+		"name": "spring-keycloack-multitenant",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24934162"
+	},
+	"item": [
+		{
+			"name": "authenticate",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{keycloak_access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "{{username}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{password}}",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "{{client_id}}",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{client_secret}}",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "openid",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/realms/{{realm_name}}/protocol/openid-connect/token",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"realms",
+						"{{realm_name}}",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{keycloak_access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"usuario 4\",\r\n    \"password\": \"123Mudar*\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9000/user",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{keycloak_access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"atualizei o delazero hehe\",\r\n    \"password\": \"123Mudar*\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9000/user/{{user_id}}",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"user",
+						"{{user_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "change status",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{keycloak_access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"usuario 4\",\r\n    \"password\": \"123Mudar*\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9000/user/change-status/{{user_id}}",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"user",
+						"change-status",
+						"{{user_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get users",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{keycloak_access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9000/user",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "test gateway",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJHanp1c0ZTc1BSX3ZaS0c3d0hNTTBNYjNZUC1tSk9hb1UzVHFxLVNIekhBIn0.eyJleHAiOjE3MTQ3NTUyNzksImlhdCI6MTcxNDc1NDk3OSwianRpIjoiNTNiYWExM2QtNmMzNy00MTE2LWE4NWQtNzM3ZjJlNDhkZmRlIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9zZXJ2aWNlZGVzayIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiIwNzEyMjJiZS1hZjA4LTQ5ZDAtOWNhNS1kMGUzZTkzZGYyOTQiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJzZXJ2aWNlZGVzayIsInNlc3Npb25fc3RhdGUiOiI3YzJjYzlmNy05ZjMzLTRmYTAtOGUyMC1mZjA5YmM5ODExOTQiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iLCJkZWZhdWx0LXJvbGVzLXNlcnZpY2VzayJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIGVtYWlsIHByb2ZpbGUiLCJzaWQiOiI3YzJjYzlmNy05ZjMzLTRmYTAtOGUyMC1mZjA5YmM5ODExOTQiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6InRlc3RlIn0.gZSaru43lzKBtaTrTOpy8sBB6UEZGd9fk0NJjpu3RjAAZTnPvqhhD-rA2pwKcIxgiJF5oTH3ppHtJQeULn00bg1c_VBsbVzJ1mVP0AueGdquz_9xs3dyan4uTh7njyIrkLHB4YTFSodwYh7y5fgdtNbqVae78PVNxUpxRvp2c-yza4Cgx_Xg5dyhEhGBHoJK-C7dsrdypJbqBUsOD-LetKFyqQChNadA7D_Iv8SyscxCZUhLM3-s7AT4U_REc5tHBBmyxu8tgRLQ90RGImkqwgM3qeNpDqcKqH5dvW31U5AsbjDLVon-2dImj9ArQoFhBQa0oDO1XlxRfP2j30NzcQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9000/not-found-test",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"not-found-test"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "username",
+			"value": "username"
+		},
+		{
+			"key": "realm_name",
+			"value": "realm_name"
+		},
+		{
+			"key": "password",
+			"value": "password"
+		},
+		{
+			"key": "client_id",
+			"value": "client_id"
+		},
+		{
+			"key": "client_secret",
+			"value": "client_secret"
+		},
+		{
+			"key": "keycloak_access_token",
+			"value": "keycloak_access_token"
+		},
+		{
+			"key": "user_id",
+			"value": "user_id"
+		}
+	]
+}
