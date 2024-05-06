@@ -38,4 +38,4 @@ For testing the endpoints of your application, you can use the provided Postman 
 
   
 
-[Download postmant collection](./spring-keycloack-multitenant.postman_collection.json)
+[Download postman collection](./spring-keycloack-multitenant.postman_collection.json)
