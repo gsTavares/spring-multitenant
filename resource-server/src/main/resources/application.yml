@@ -9,3 +9,11 @@ com:
         - iss: http://localhost:8080/realms/
           authorities:
           - path: $.realm_access.roles
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/multitenancy
+    username: postgres
+    password: postdba
+
+          
